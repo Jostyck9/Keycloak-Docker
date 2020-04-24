@@ -40,3 +40,11 @@ CMD ["-b", "0.0.0.0"]
 $ sudo docker build --tag mykeycloack .
 $ sudo docker run --publish 8080:8080 mykeycloack
 ```
+
+## ssh error
+Sometimes, keycloak will refuse the connection to the admin interface because of an invalid ssh for the server.
+To fix this, connect to the database and update the realm table by doing:
+```sql
+update realm set ssl_required='NONE';
+```
+It will be usefull when a server manage by himself the ssh certificate (as on clevercloud)
