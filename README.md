@@ -24,7 +24,7 @@ To connect to an external db (highly recommended for a server, or during a resta
 ```dockerfile
 FROM jboss/keycloak:7.0.1
 
-COPY auth-require-role-extension-1.0.0.0-SNAPSHOT.jar /opt/jboss/keycloak/standalone/deployments/
+COPY deployments /opt/jboss/keycloak/standalone/deployments
 
 ENV KEYCLOAK_USER=admin
 
@@ -48,3 +48,6 @@ To fix this, connect to the database and update the realm table by doing:
 update realm set ssl_required='NONE';
 ```
 It will be usefull when a server manage by himself the ssh certificate (as on clevercloud)
+
+## add plugins
+If you want to add a new plugin to keycloak, just add the .jar file in the deployments folder

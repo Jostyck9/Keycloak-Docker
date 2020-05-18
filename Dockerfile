@@ -1,6 +1,10 @@
-FROM jboss/keycloak:7.0.1
+FROM jboss/keycloak:latest
 
-COPY auth-require-role-extension-1.0.0.0-SNAPSHOT.jar /opt/jboss/keycloak/standalone/deployments/
+COPY deployments /opt/jboss/keycloak/standalone/deployments
+
+ENV KEYCLOAK_USER=admin
+
+ENV KEYCLOAK_PASSWORD=admin
 
 EXPOSE 8080
 
