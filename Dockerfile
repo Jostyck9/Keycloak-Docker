@@ -1,6 +1,8 @@
-FROM jboss/keycloak:latest
+FROM jboss/keycloak:7.0.1
 
 COPY deployments /opt/jboss/keycloak/standalone/deployments
+
+COPY themes /opt/jboss/keycloak/themes/
 
 ENV KEYCLOAK_USER=admin
 

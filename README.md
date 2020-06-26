@@ -26,6 +26,8 @@ FROM jboss/keycloak:7.0.1
 
 COPY deployments /opt/jboss/keycloak/standalone/deployments
 
+COPY themes /opt/jboss/keycloak/themes/
+
 ENV KEYCLOAK_USER=admin
 
 ENV KEYCLOAK_PASSWORD=admin
@@ -41,7 +43,7 @@ $ sudo docker build --tag mykeycloack .
 $ sudo docker run --publish 8080:8080 mykeycloack
 ```
 
-## ssh error
+## SSH error
 Sometimes, keycloak will refuse the connection to the admin interface because of an invalid ssh for the server.
 To fix this, connect to the database and update the realm table by doing:
 ```sql
@@ -49,5 +51,15 @@ update realm set ssl_required='NONE';
 ```
 It will be usefull when a server manage by himself the ssh certificate (as on clevercloud)
 
-## add plugins
+# Extensions
+
+## Add plugins
 If you want to add a new plugin to keycloak, just add the .jar file in the deployments folder
+You can find an example of en event listener plugin at this link : [Event-Listener-SPI](https://dev.to/adwaitthattey/building-an-event-listener-spi-plugin-for-keycloak-2044)
+
+## Add custom theme
+You can create custom themes following the [keycloak tutorial](https://www.keycloak.org/docs/latest/server_development/#_themes)
+
+To add them, you only have to put them inside the theme folder and restart the dockerfile to install them.
+
+Currently there is a custom theme for France connect, it will use the France Connect button to follow their requirements.
